@@ -11,10 +11,14 @@ AntBuilder ant
 
 Hadoop() {
   ant = new AntBuilder()
+  println "Aftyer Ant"
   context = ServiceContextFactory.getServiceContext()
+  println "Aftyer Context"
   config = new ConfigSlurper().parse(new File("${context.serviceDirectory}/hadoop-service.properties").toURL())
+    println "Aftyer Config"
 
   installDir = "${System.properties["user.home"]}/.cloudify/${context.applicationName}_${context.serviceName}_${context.instanceId}"
+   println "Aftyer installDir"
   ip = ServiceUtils.getPrimaryInetAddress(); 
   workingDir = context.serviceDirectory
   nameServicePort = "50070"
