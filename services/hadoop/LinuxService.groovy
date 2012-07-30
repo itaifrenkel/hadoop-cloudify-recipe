@@ -16,6 +16,10 @@ void start () {
   serviceCmdThrowOnExitCode("${name} start"); 
 }
 
+void start (args) {
+  serviceCmdThrowOnExitCode("${name} start ${args}"); 
+}
+
 void stop() {
   serviceCmdThrowOnExitCode("${name} stop"); 
 }
