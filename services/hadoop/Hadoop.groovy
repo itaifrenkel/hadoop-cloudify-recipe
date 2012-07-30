@@ -26,7 +26,7 @@ def static init(serviceContext) {
 }
 
 def static boolean isNameNodeRuning(){
-  serviceCmd("hadoop-hdfs-namenode status").contains("running");
+  serviceCmd("hadoop-hdfs-namenode status").contains("OK");
 }
 
 def static void install() {
@@ -84,7 +84,7 @@ static String serviceCmd(args)  {
              }
       String cmdOut = ant.project.properties.cmdOut
       Integer cmdExit = ant.project.properties.cmdExit 
-      if (cmdExit != 0) {
+      if (cmdExit != 0 && !args.contains("status")) {
         throw new Exception("command \"service ${args}\" exit code ${cmdExit} output: ${cmdOut}")
       }
       return cmdOut
