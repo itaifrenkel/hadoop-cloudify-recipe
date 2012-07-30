@@ -20,7 +20,7 @@ def static init(serviceContext) {
 
   //installDir = "${System.properties["user.home"]}/.cloudify/${context.applicationName}_${context.serviceName}_${context.instanceId}"
   println "Aftyer installDir" 
-  workingDir = context.serviceDirectory
+  //workingDir = context.serviceDirectory
   nameServicePort = "50070"
     
 }
