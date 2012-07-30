@@ -38,34 +38,20 @@ start () {
 }
 
 startDataNode(){
-  cmd = "service hadoop-hdfs-datanode start") 
-  ant.exec();
+  serviceCmd("hadoop-hdfs-datanode start"); 
 }
 
 startNameNode(){
-  cmd = "service hadoop-hdfs-namenode start ${ip}:${nameServicePort}"
-  ant.exec(cmd)  
+  serviceCmd("hadoop-hdfs-namenode start ${ip}:${nameServicePort}"
+   
 }
 
 startSecondaryNode(){
-  cmd = "service hadoop-hdfs-secondarynamenode start"
-  ant.exec(cmd)  
+  serviceCmd("hadoop-hdfs-secondarynamenode start");
 }
 
-isNameNodeRunning {
-      ant = new AntBuilder()
-      ant.exec(outputproperty:"cmdOut",
-             resultproperty:"cmdExit",
-             failonerror: "true",
-             executable: "service") {
-                arg("hadoop-hdfs-namenode")
-                arg("status")
-             }
-  	  result = ant.project.properties.cmdOut
-      result.contains("running")
-}
 
-serviceCommand(args) {
+serviceCmd(args) {
       ant = new AntBuilder()
       ant.exec(outputproperty:"cmdOut", //includes stdout and stderr
              resultproperty:"cmdExit",
