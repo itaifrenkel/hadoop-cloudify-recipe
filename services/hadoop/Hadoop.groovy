@@ -59,6 +59,12 @@ void serviceCmd(args) {
              executable: "service") {
                 arg(line:args)
              }
+      cmdOut = ant.project.properties.cmdOut
+      cmdExit = ant.project.properties.cmdExit
+      if (cmdExit != 0) {
+        throw new Exception("command \"service ${args}\" exit code ${cmdExit} output: ${cmdOut}")
+      }
+      return cmdOut
 }
 
 }
