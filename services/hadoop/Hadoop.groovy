@@ -52,4 +52,17 @@ startSecondaryNode(){
   ant.exec(cmd)  
 }
 
+isNameNodeRunning {
+      ant = new AntBuilder()
+      ant.exec(outputproperty:"cmdOut",
+             resultproperty:"cmdExit",
+             failonerror: "true",
+             executable: "service") {
+                arg("hadoop-hdfs-namenode")
+                arg("status")
+             }
+  	  result = ant.project.properties.cmdOut
+      result.contains("running")
+}
+
 }
