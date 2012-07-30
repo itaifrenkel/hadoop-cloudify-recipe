@@ -20,7 +20,11 @@ service {
 	lifecycle {
 		install { Hadoop.install() }
 		start {
-			Hadoop.start() }
+			Hadoop.start()
+			
+			//return dummy process
+			return ":".execute()
+		}
 		preStop {
 			Hadoop.stop()
 		}	
@@ -29,6 +33,15 @@ service {
     		Hadoop.isNameNodeRuning()
 		}
 		
+        locator {     
+				 def nameNodePId= ServiceUtils.ProcessUtils.getPidsWithQuery("Args.*.ew=org.apache.hadoop.hdfs.server.namenode.NameNode")
+				 println "~~~~~~~~~~~~~~~~~~~~~~~~~ nameNodePId=" + nameNodePId
+				 List<Long> hdfsPIds = []
+				 hdfsPIds.addAll(nameNodePId)
+				 println "~~~~~~~~~~~~~~~~~~~~~~~~~ hdfsPIds=" + hdfsPIds
+				 return hdfsPIds
+		  }
+
 		monitors {
 		
 			def metricNamesToMBeansNames = [
