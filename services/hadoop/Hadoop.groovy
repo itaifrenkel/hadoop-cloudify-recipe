@@ -41,6 +41,12 @@ static void start () {
   
 }
 
+static void stop() {
+  stopDataNode();
+  stoptSecondaryNode();
+  stopNameNode();
+}
+
 def static  startDataNode(){
   serviceCmd("hadoop-hdfs-datanode start"); 
 }
