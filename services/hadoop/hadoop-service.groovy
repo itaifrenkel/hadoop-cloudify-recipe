@@ -15,7 +15,7 @@ service {
 		
 		start {
 			namenode.start("${ipAddress}:${nameNodeServicePort}")
-			datanode.start()
+			datanode.start("${ipAddress}:${dataNodeServicePort}")
 			//dummy process
 			return "sh -c :".execute() 
 		}
@@ -56,7 +56,7 @@ service {
 	
 	network {
         port = nameNodeServicePort
-        protocolDescription ="Hadoop IPC ClientProtocol"
+        protocolDescription ="HTTP"
     }
 	
 	userInterface {
