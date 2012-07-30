@@ -55,7 +55,6 @@ service {
 			]
 			
 			return getJmxMetrics("127.0.0.1",nameNodeJmxPort,nameNodeJmxBeans)
-			//return getJmxMetrics(ServiceUtils.getPrimaryInetAddress(),nameNodeJmxPort,nameNodeJmxBeans)
         }
 
 	}
