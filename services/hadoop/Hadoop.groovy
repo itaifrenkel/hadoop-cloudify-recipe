@@ -60,7 +60,7 @@ def static stopSecondaryNode(){
 static def serviceCmd(args)  {
       def ant = new AntBuilder()
       ant.exec(outputproperty:"stdout", 
- 		   errorproperty:"stderr"
+ 		       errorproperty:"stderr",
              resultproperty:"exitcode",
              executable: "service") {
                 arg(line:args)
