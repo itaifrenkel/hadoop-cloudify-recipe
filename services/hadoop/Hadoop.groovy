@@ -27,7 +27,7 @@ def static init(serviceContext) {
 
 def static boolean isNameNodeRuning(){
   def output =serviceCmd("hadoop-hdfs-namenode status");
-  return (output.contains("running") && output.contains("OK"));
+  return (output.contains("[OK]"));
 }
 
 def static void install() {
@@ -79,15 +79,17 @@ static String serviceCmd(args)  {
       def ant = new AntBuilder()
       ant.exec(outputproperty:"cmdOut", //includes stdout and stderr
              resultproperty:"cmdExit",
-             failonerror: "true",
+             failonerror: "false",
              executable: "service") {
                 arg(line:args)
              }
       String cmdOut = ant.project.properties.cmdOut
       Integer cmdExit = ant.project.properties.cmdExit 
+      /* Rem'd by Elaad because cmdExit != 0 does not imply failure
       if (cmdExit != 0 && !args.contains("status")) {
         throw new Exception("command \"service ${args}\" exit code ${cmdExit} output: ${cmdOut}")
       }
+      */
       return cmdOut
 }
 
