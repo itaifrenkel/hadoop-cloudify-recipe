@@ -23,7 +23,7 @@ service {
 			Hadoop.start()
 			
 			//return dummy process
-			return ":".execute()
+			return "sh -c :".execute()
 		}
 		preStop {
 			Hadoop.stop()
