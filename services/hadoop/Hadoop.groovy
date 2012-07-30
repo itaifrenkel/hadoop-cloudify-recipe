@@ -17,6 +17,12 @@ Hadoop() {
   installDir = "${System.properties["user.home"]}/.cloudify/${context.applicationName}_${context.serviceName}_${context.instanceId}"
   ip = ServiceUtils.getPrimaryInetAddress(); 
   workingDir = context.serviceDirectory
+  nameServicePort = "50070"
+    
+}
+
+nameServiceIsRuning(){
+  return true;
 }
 
 install() {
@@ -37,7 +43,7 @@ startDataNode(){
 }
 
 startNameNode(){
-  cmd = "service hadoop-hdfs-namenode start ${ip}:50070"
+  cmd = "service hadoop-hdfs-namenode start ${ip}:${nameServicePort}"
   ant.exec(cmd)  
 }
 
