@@ -70,7 +70,7 @@ static def serviceCmd(args)  {
 
 static def serviceCmdThrowOnExitCode(args)  {
 	def ret = serviceCmd(args)
-	  if (ret.exitcode != 0) {
+	  if (ret.exitcode as int != 0) {
          throw new Exception("command \"service ${args}\" exit code ${ret.exitcode} stdout: ${ret.stdout} stderr: ${ret.stderr}")
        }
 	return ret;
