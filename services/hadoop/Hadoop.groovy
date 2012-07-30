@@ -21,15 +21,15 @@ Hadoop() {
     
 }
 
-isNameServiceRuning(){
+boolean isNameServiceRuning(){
   serviceCmd("hadoop-hdfs-namenode status").contains("running");
 }
 
-install() {
+void install() {
 
 }
 
-start () {
+void start () {
  
   startNameNode();
   startDataNode();
@@ -37,21 +37,21 @@ start () {
   
 }
 
-startDataNode(){
+void startDataNode(){
   serviceCmd("hadoop-hdfs-datanode start"); 
 }
 
-startNameNode(){
+void startNameNode(){
   serviceCmd("hadoop-hdfs-namenode start ${ip}:${nameServicePort}"
    
 }
 
-startSecondaryNode(){
+void startSecondaryNode(){
   serviceCmd("hadoop-hdfs-secondarynamenode start");
 }
 
 
-serviceCmd(args) {
+void serviceCmd(args) {
       ant = new AntBuilder()
       ant.exec(outputproperty:"cmdOut", //includes stdout and stderr
              resultproperty:"cmdExit",
