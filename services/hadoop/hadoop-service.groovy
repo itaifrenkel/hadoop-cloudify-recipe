@@ -18,7 +18,7 @@ service {
 
 	lifecycle {
 		install { Hadoop.install() }
-		start { println "befor start f"
+		start { println "before start f"
 			//def context = ServiceContextFactory.getServiceContext()
 			Hadoop.init(context)
 			Hadoop.startNameNode() }
@@ -27,6 +27,21 @@ service {
     		Hadoop.isNameNodeRuning()
 		}
 		
+		monitors {
+		
+			def metricNamesToMBeansNames = [
+				"Number of active metrics sources": ["Hadoop:name=MetricsSystem,service=NameNode,sub=Stats", "NumActiveSources"],
+				"Number of active metrics sinks": ["Hadoop:name=MetricsSystem,service=NameNode,sub=Stats", "NumActiveSinks"],
+				"Number of ops for snapshot stats": ["Hadoop:name=MetricsSystem,service=NameNode,sub=Stats", "SnapshotNumOps"],
+				"Average time for snapshot stats": ["Hadoop:name=MetricsSystem,service=NameNode,sub=Stats", "SnapshotAvgTime"],
+				"Number of ops for publishing stats": ["Hadoop:name=MetricsSystem,service=NameNode,sub=Stats", "PublishNumOps"],
+				"Average time for publishing stats": ["Hadoop:name=MetricsSystem,service=NameNode,sub=Stats", "PublishAvgTime"],
+				"Dropped updates by all sinks": ["Hadoop:name=MetricsSystem,service=NameNode,sub=Stats", "DroppedPubAll"],
+			]
+			
+			return getJmxMetrics("127.0.0.1",currJmxPort,metricNamesToMBeansNames)										
+    	}			
+
 	}
 	
 
