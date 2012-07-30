@@ -26,7 +26,7 @@ def static init(serviceContext) {
 }
 
 def static boolean isNameNodeRuning(){
-  !serviceCmd("hadoop-hdfs-namenode status").contains("not running");
+  !serviceCmd("hadoop-hdfs-namenode status").contains("FAILED");
 }
 
 def static void install() {
