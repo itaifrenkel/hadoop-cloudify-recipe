@@ -26,10 +26,11 @@ service {
 		}	
 		
 		startDetection {
-    		return 
-				namenode.isStarted() &&
-				datanode.isStarted() &&
-				ServiceUtils.isHttpURLAvailable("http://${ipAddress}:${dataNodeInfoPort}")
+			def dataNodeInfoUrl="http://${ipAddress}:${dataNodeInfoPort}"			
+			return
+			namenode.isStarted() &&
+			datanode.isStarted() &&
+			ServiceUtils.isHttpURLAvailable(dataNodeInfoUrl)
 		}
 		
         locator {     
@@ -52,11 +53,6 @@ service {
 			return JmxMonitors.getJmxMetrics("127.0.0.1",nameNodeJmxPort,nameNodeJmxBeans)
         }
 	}
-	
-	network {
-        port = nameNodeInfoPort
-        protocolDescription ="HTTP"
-    }
 	
 	userInterface {
 
