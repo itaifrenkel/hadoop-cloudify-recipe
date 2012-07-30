@@ -19,9 +19,7 @@ service {
 
 	lifecycle {
 		install { Hadoop.install() }
-		start { println "before start f"
-			//def context = ServiceContextFactory.getServiceContext()
-			Hadoop.init(context)
+		start {
 			Hadoop.start() }
 		preStop {
 			Hadoop.stop()
