@@ -32,7 +32,7 @@ start () {
 }
 
 startDataNode(){
-   cmd = "sudo service hadoop-hdfs-datanode start") 
+  cmd = "service hadoop-hdfs-datanode start") 
   ant.exec();
 }
 
@@ -42,7 +42,7 @@ startNameNode(){
 }
 
 startSecondaryNode(){
-  cmd = "sudo service hadoop-hdfs-secondarynamenode start"
+  cmd = "service hadoop-hdfs-secondarynamenode start"
   ant.exec(cmd)  
 }
 
