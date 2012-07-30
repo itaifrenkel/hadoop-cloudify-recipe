@@ -29,7 +29,7 @@ service {
     		return 
 				namenode.isStarted() &&
 				datanode.isStarted() &&
-				ServiceUtils.isHttpURLAvailable("http://${ipAddress}:${dataNodeInfoPort}") &&
+				ServiceUtils.isHttpURLAvailable("http://${ipAddress}:${dataNodeInfoPort}")
 		}
 		
         locator {     
