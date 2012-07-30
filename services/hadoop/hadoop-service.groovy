@@ -19,7 +19,8 @@ service {
 	lifecycle {
 		install { Hadoop.install() }
 		start { println "befor start f"
-			Hadoop.init()
+			def context = ServiceContextFactory.getServiceContext()
+			Hadoop.init(context)
 			Hadoop.startNameNode() }
 			startDetection {
     	//	ServiceUtils.isPortsOccupied(hadoop.nameServicePort, "127.0.0.1") &&
