@@ -3,7 +3,9 @@ service {
 	icon "hadoop.jpg"
 	type "NOSQL_DB"
 
+	def ipAddress = ServiceUtils.getPrimaryInetAddress();
 	def namenode = new LinuxService("hadoop-hdfs-namenode")
+	def datanode = new LinuxService("hadoop-hdfs-datanode")
 	
 	lifecycle {
 		
@@ -12,23 +14,24 @@ service {
 		}
 		
 		start {
-			def ipAddress = ServiceUtils.getPrimaryInetAddress();
 			namenode.start "${ipAddress}:${nameNodeServicePort}"
-			
+			datanode.start
 			//dummy process
 			return "sh -c :".execute() 
 		}
 		
 		preStop {
+			datanode.stop()
 			namenode.stop()
 		}	
 		
 		startDetection {
-    		namenode.isRuning()
+    		namenode.isStarted() && datanode.isStarted()
 		}
 		
         locator {     
-		    ServiceUtils.ProcessUtils.getPidsWithQuery("Args.*.ew=org.apache.hadoop.hdfs.server.namenode.NameNode")
+		    ServiceUtils.ProcessUtils.getPidsWithQuery("Args.*.ew=org.apache.hadoop.hdfs.server.namenode.NameNode") +
+			ServiceUtils.ProcessUtils.getPidsWithQuery("Args.*.ew=org.apache.hadoop.hdfs.server.datanode.DataNode")
         }
 
 		monitors {

@@ -8,7 +8,7 @@ LinuxService(name) {
 	this.name = name
 }
 
-boolean isRuning() {
+boolean isStarted() {
   serviceCmd("${name} status").exitcode == 0;
 }
 
