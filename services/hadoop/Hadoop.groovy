@@ -42,7 +42,7 @@ void startDataNode(){
 }
 
 void startNameNode(){
-  serviceCmd("hadoop-hdfs-namenode start ${ip}:${nameServicePort}"
+  serviceCmd("hadoop-hdfs-namenode start ${ip}:${nameServicePort}")
    
 }
 
