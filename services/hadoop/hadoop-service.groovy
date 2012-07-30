@@ -1,46 +1,30 @@
-import java.util.concurrent.TimeUnit;
-import static Hadoop.*
-import static JmxMonitors.*
-
 service {
 	name "hadoop"
 	icon "hadoop.jpg"
 	type "NOSQL_DB"
-	
-  elastic false
-	numInstances 1
-	minAllowedInstances 1
-	maxAllowedInstances 2
-	//Hadoop.init()
-	
-	compute {
-		template "SMALL_LINUX"
-	}
 
 	lifecycle {
-		install { Hadoop.install() }
+		
+		install { 
+			Hadoop.install() 
+		}
+		
 		start {
 			Hadoop.start()
-			
-			//return dummy process
-			return "sh -c :".execute()
+			return "sh -c :".execute() //dummy process
 		}
+		
 		preStop {
 			Hadoop.stop()
 		}	
+		
 		startDetection {
-    	//	ServiceUtils.isPortsOccupied(hadoop.nameServicePort, "127.0.0.1") &&
     		Hadoop.isNameNodeRuning()
 		}
 		
         locator {     
-				 def nameNodePId= ServiceUtils.ProcessUtils.getPidsWithQuery("Args.*.ew=org.apache.hadoop.hdfs.server.namenode.NameNode")
-				 println "~~~~~~~~~~~~~~~~~~~~~~~~~ nameNodePId=" + nameNodePId
-				 List<Long> hdfsPIds = []
-				 hdfsPIds.addAll(nameNodePId)
-				 println "~~~~~~~~~~~~~~~~~~~~~~~~~ hdfsPIds=" + hdfsPIds
-				 return hdfsPIds
-		  }
+		    ServiceUtils.ProcessUtils.getPidsWithQuery("Args.*.ew=org.apache.hadoop.hdfs.server.namenode.NameNode")
+        }
 
 		monitors {
 		
@@ -54,9 +38,8 @@ service {
 				"Dropped updates by all sinks": ["Hadoop:name=MetricsSystem,service=NameNode,sub=Stats", "DroppedPubAll"],
 			]
 			
-			return getJmxMetrics("127.0.0.1",nameNodeJmxPort,nameNodeJmxBeans)
+			return JmxMonitors.getJmxMetrics("127.0.0.1",nameNodeJmxPort,nameNodeJmxBeans)
         }
-
 	}
 	
 	userInterface {
@@ -76,7 +59,6 @@ service {
 					"Dropped updates by all sinks",
 				])
 			} ,
-
 		]
 		)
 
@@ -158,5 +140,4 @@ service {
 		]
 		)
 	}
-
 }
