@@ -1,5 +1,6 @@
 import java.util.concurrent.TimeUnit;
 import static Hadoop.*
+import static JmxMonitors.*
 
 service {
 	name "hadoop"
@@ -40,7 +41,7 @@ service {
 			]
 			
 			return getJmxMetrics("127.0.0.1",currJmxPort,metricNamesToMBeansNames)										
-    	}			
+    	        }			
 
 	}
 	
