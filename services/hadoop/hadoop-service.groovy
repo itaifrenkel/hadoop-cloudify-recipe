@@ -22,10 +22,11 @@ service {
 			def context = ServiceContextFactory.getServiceContext()
 			Hadoop.init(context)
 			Hadoop.startNameNode() }
-			startDetection {
+		startDetection {
     	//	ServiceUtils.isPortsOccupied(hadoop.nameServicePort, "127.0.0.1") &&
     		Hadoop.isNameNodeRuning()
-	}
+		}
+		
 	}
 	
 
