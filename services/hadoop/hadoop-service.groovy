@@ -14,8 +14,8 @@ service {
 		}
 		
 		start {
-			namenode.start("${ipAddress}:${nameNodeServicePort}")
-			datanode.start("${ipAddress}:${dataNodeServicePort}")
+			namenode.start("${ipAddress}:${nameNodeInfoPort}")
+			datanode.start("${ipAddress}:${dataNodeInfoPort}")
 			//dummy process
 			return "sh -c :".execute() 
 		}
@@ -26,11 +26,11 @@ service {
 		}	
 		
 		startDetection {
-    		namenode.isStarted() && 
-			ServiceUtils.isPortsOccupied(nameNodeServicePort, "127.0.0.1")
+    		namenode.isStarted()
+			&& ServiceUtils.isHttpURLAvailable("http://${ipAddress}:${nameNodeInfoPort}")
 			
-			datanode.isStarted() &&
-			ServiceUtils.isPortsOccupied(dataNodeServicePort, "127.0.0.1")
+			&& datanode.isStarted()
+			//&& ServiceUtils.isHttpURLAvailable("http://${ipAddress}:${dataNodeInfoPort}")
 		}
 		
         locator {     
@@ -55,7 +55,7 @@ service {
 	}
 	
 	network {
-        port = nameNodeServicePort
+        port = nameNodeInfoPort
         protocolDescription ="HTTP"
     }
 	
