@@ -55,7 +55,7 @@ void startSecondaryNode(){
 }
 
 
-void serviceCmd(args) {
+def serviceCmd(args)  {
       ant = new AntBuilder()
       ant.exec(outputproperty:"cmdOut", //includes stdout and stderr
              resultproperty:"cmdExit",
