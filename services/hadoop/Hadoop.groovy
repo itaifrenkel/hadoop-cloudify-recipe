@@ -65,4 +65,26 @@ isNameNodeRunning {
       result.contains("running")
 }
 
+isServiceRunning(name) {
+      ant = new AntBuilder()
+      ant.exec(outputproperty:"cmdOut", //includes stdout and stderr
+             resultproperty:"cmdExit",
+             failonerror: "true",
+             executable: "service") {
+                arg(name)
+                arg("status")
+             }
+      ant.project.properties.cmdOut.contains("running")
+}
+
+startService(name) {
+      ant = new AntBuilder()
+      ant.exec(outputproperty:"cmdOut", //includes stdout and stderr
+             resultproperty:"cmdExit",
+             failonerror: "true",
+             executable: "service") {
+                arg(name)
+                arg("start")
+             }
+}
 }
