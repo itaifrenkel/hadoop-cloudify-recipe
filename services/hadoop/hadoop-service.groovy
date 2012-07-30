@@ -10,7 +10,7 @@ service {
 	numInstances 1
 	minAllowedInstances 1
 	maxAllowedInstances 2
-	Hadoop.init()
+	//Hadoop.init()
 	
 	compute {
 		template "SMALL_LINUX"
@@ -19,6 +19,7 @@ service {
 	lifecycle {
 		install { Hadoop.install() }
 		start { println "befor start f"
+			Hadoop.init()
 			Hadoop.startNameNode() }
 			startDetection {
     	//	ServiceUtils.isPortsOccupied(hadoop.nameServicePort, "127.0.0.1") &&
