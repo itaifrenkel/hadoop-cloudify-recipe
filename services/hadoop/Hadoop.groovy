@@ -52,7 +52,7 @@ def static startSecondaryNode(){
 }
 
 
-def static String serviceCmd(args)  {
+static String serviceCmd(args)  {
       ant = new AntBuilder()
       ant.exec(outputproperty:"cmdOut", //includes stdout and stderr
              resultproperty:"cmdExit",
