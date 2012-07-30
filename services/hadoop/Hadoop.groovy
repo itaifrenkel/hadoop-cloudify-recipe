@@ -65,12 +65,14 @@ static def serviceCmd(args)  {
              executable: "service") {
                 arg(line:args)
              }
-      return ant.project.properties;
+	  def ret = ant.project.properties;
+	  ret.exitcode = ret.exitcode as int;
+      return ret;
 }
 
 static def serviceCmdThrowOnExitCode(args)  {
 	def ret = serviceCmd(args)
-	  if (ret.exitcode as int != 0) {
+	  if (ret.exitcode != 0) {
          throw new Exception("command \"service ${args}\" exit code ${ret.exitcode} stdout: ${ret.stdout} stderr: ${ret.stderr}")
        }
 	return ret;
