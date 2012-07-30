@@ -9,7 +9,7 @@ service {
 	numInstances 1
 	minAllowedInstances 1
 	maxAllowedInstances 2
-	hadoopx = null;
+	def hadoopx = null;
 	def hadoop = {
 		if (hadoopx == null)
 			hadoopx =new Hadoop()
