@@ -26,11 +26,10 @@ service {
 		}	
 		
 		startDetection {
-    		namenode.isStarted()
-			&& ServiceUtils.isHttpURLAvailable("http://${ipAddress}:${nameNodeInfoPort}")
-			
-			&& datanode.isStarted()
-			//&& ServiceUtils.isHttpURLAvailable("http://${ipAddress}:${dataNodeInfoPort}")
+    		return 
+				namenode.isStarted() &&
+				ServiceUtils.isHttpURLAvailable("http://${ipAddress}:${nameNodeInfoPort}") &&
+				datanode.isStarted()
 		}
 		
         locator {     
