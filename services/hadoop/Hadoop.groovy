@@ -26,7 +26,7 @@ def static init(serviceContext) {
 }
 
 def static boolean isNameNodeRuning(){
-  output =serviceCmd("hadoop- &hdfs-namenode status");
+  def output =serviceCmd("hadoop- &hdfs-namenode status");
   return (output.contains("running") && output.contains("OK"));
 }
 
