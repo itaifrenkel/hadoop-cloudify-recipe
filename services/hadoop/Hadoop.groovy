@@ -61,7 +61,7 @@ static String serviceCmd(args)  {
                 arg(line:args)
              }
       String cmdOut = ant.project.properties.cmdOut
-      cmdExit = ant.project.properties.cmdExit
+      Integer cmdExit = ant.project.properties.cmdExit AsInteger
       if (cmdExit != 0) {
         throw new Exception("command \"service ${args}\" exit code ${cmdExit} output: ${cmdOut}")
       }
