@@ -30,7 +30,7 @@ def static void install() {
 
 }
 
-def static void start () {
+static String void start () {
  
   startNameNode();
   startDataNode();
