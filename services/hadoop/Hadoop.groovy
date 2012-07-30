@@ -54,6 +54,18 @@ def static startSecondaryNode(){
   serviceCmd("hadoop-hdfs-secondarynamenode start");
 }
 
+def static stopDataNode(){
+ serviceCmd("hadoop-hdfs-datanode stop"); 
+}
+
+def static stopNameNode(){
+ serviceCmd("hadoop-hdfs-namenode stop");
+}
+
+def static stopSecondaryNode(){
+  serviceCmd("hadoop-hdfs-secondarynamenode stop");
+}
+
 
 static String serviceCmd(args)  {
       def ant = new AntBuilder()
