@@ -7,18 +7,18 @@ class Hadoop {
 def static workingDir
 def static nameServicePort = "50070"
 def static ip = ServiceUtils.getPrimaryInetAddress(); 
-def static context;
-def static config;
-def static installDir;
+//def static context;
+//def static config;
+//def static installDir;
 
 def static init(serviceContext) {
  
-  context = serviceContext
+  //context = serviceContext
   println "Aftyer Context"
-  config = new ConfigSlurper().parse(new File("${context.serviceDirectory}/hadoop-service.properties").toURL())
+  //config = new ConfigSlurper().parse(new File("${context.serviceDirectory}/hadoop-service.properties").toURL())
   println "Aftyer Config"
 
-  installDir = "${System.properties["user.home"]}/.cloudify/${context.applicationName}_${context.serviceName}_${context.instanceId}"
+  //installDir = "${System.properties["user.home"]}/.cloudify/${context.applicationName}_${context.serviceName}_${context.instanceId}"
   println "Aftyer installDir" 
   workingDir = context.serviceDirectory
   nameServicePort = "50070"
