@@ -7,6 +7,8 @@ class Hadoop {
 def static workingDir
 def static nameServicePort = "50070"
 def static ip = ServiceUtils.getPrimaryInetAddress(); 
+def static context;
+def static config;
 
 def static init() {
  
