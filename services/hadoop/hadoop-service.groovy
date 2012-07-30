@@ -18,13 +18,13 @@ service {
 
 	lifecycle {
 		install { hadoop.install() }
-		start { hadoop.start() }
+		start { hadoop.startNameNode() }
 	}
 	
 
 	startDetection {
-    		ServiceUtils.isPortsOccupied(hadoop.nameServicePort, "127.0.0.1") &&
-    		hadoop.nameServiceIsRuning()
+    	//	ServiceUtils.isPortsOccupied(hadoop.nameServicePort, "127.0.0.1") &&
+    		hadoop.isNameServiceRuning()
 	}
 
 
