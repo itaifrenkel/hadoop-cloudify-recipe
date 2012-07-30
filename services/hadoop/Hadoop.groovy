@@ -21,8 +21,8 @@ Hadoop() {
     
 }
 
-nameServiceIsRuning(){
-  return true;
+isNameServiceRuning(){
+  serviceCmd("hadoop-hdfs-namenode status").contains("running");
 }
 
 install() {
