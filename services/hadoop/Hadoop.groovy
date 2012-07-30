@@ -34,7 +34,8 @@ def static void install() {
 }
 
 static void start () {
- 
+  if (isNameNodeRuning())
+   stop();
   startNameNode();
   startDataNode();
   startSecondaryNode();
