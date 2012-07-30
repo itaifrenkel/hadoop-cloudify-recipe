@@ -10,7 +10,7 @@ service {
 	numInstances 1
 	minAllowedInstances 1
 	maxAllowedInstances 2
-
+	Hadoop.init()
 	
 	compute {
 		template "SMALL_LINUX"
