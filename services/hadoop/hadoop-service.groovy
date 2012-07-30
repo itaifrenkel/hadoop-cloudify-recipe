@@ -54,7 +54,7 @@ service {
 				"Dropped updates by all sinks": ["Hadoop:name=MetricsSystem,service=NameNode,sub=Stats", "DroppedPubAll"],
 			]
 			
-			return getJmxMetrics("127.0.0.1",11099,nameNodeJmxBeans)
+			return getJmxMetrics("127.0.0.1",nameNodeJmxPort,nameNodeJmxBeans)
 			//return getJmxMetrics(ServiceUtils.getPrimaryInetAddress(),nameNodeJmxPort,nameNodeJmxBeans)
         }
 
