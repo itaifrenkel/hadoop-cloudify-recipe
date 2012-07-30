@@ -11,9 +11,9 @@ def static context;
 def static config;
 def static installDir;
 
-def static init() {
+def static init(serviceContext) {
  
-  context = ServiceContextFactory.getServiceContext()
+  context = serviceContext
   println "Aftyer Context"
   config = new ConfigSlurper().parse(new File("${context.serviceDirectory}/hadoop-service.properties").toURL())
   println "Aftyer Config"
