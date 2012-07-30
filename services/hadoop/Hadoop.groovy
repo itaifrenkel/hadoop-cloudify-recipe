@@ -21,7 +21,7 @@ Hadoop() {
     
 }
 
-boolean isNameServiceRuning(){
+boolean isNameNodeRuning(){
   serviceCmd("hadoop-hdfs-namenode status").contains("running");
 }
 
