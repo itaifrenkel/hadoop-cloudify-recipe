@@ -4,23 +4,19 @@ import org.cloudifysource.dsl.context.ServiceContext;
 
 class Hadoop {
 
-def  workingDir
-def  config
-def  context
-def ant
+def static workingDir
+def static nameServicePort = "50070"
+def static ip = ServiceUtils.getPrimaryInetAddress(); 
 
-Hadoop() {
-   println "Abefore ant"
-  ant = new AntBuilder()
-  println "Aftyer Ant"
+def static init() {
+ 
   context = ServiceContextFactory.getServiceContext()
   println "Aftyer Context"
   config = new ConfigSlurper().parse(new File("${context.serviceDirectory}/hadoop-service.properties").toURL())
-    println "Aftyer Config"
+  println "Aftyer Config"
 
   installDir = "${System.properties["user.home"]}/.cloudify/${context.applicationName}_${context.serviceName}_${context.instanceId}"
-   println "Aftyer installDir"
-  ip = ServiceUtils.getPrimaryInetAddress(); 
+  println "Aftyer installDir" 
   workingDir = context.serviceDirectory
   nameServicePort = "50070"
     
