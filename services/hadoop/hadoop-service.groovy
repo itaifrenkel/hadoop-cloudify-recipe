@@ -27,7 +27,7 @@ service {
 		start { hadoop().startNameNode() }
 			startDetection {
     	//	ServiceUtils.isPortsOccupied(hadoop.nameServicePort, "127.0.0.1") &&
-    		hadoop().isNameServiceRuning()
+    		hadoop().isNameNodeRuning()
 	}
 	}
 	
