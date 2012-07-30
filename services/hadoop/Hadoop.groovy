@@ -15,7 +15,7 @@ Hadoop() {
   config = new ConfigSlurper().parse(new File("${context.serviceDirectory}/hadoop-service.properties").toURL())
 
   installDir = "${System.properties["user.home"]}/.cloudify/${context.applicationName}_${context.serviceName}_${context.instanceId}"
-
+  ip = ServiceUtils.getPrimaryInetAddress(); 
   workingDir = context.serviceDirectory
 }
 
@@ -24,7 +24,26 @@ install() {
 }
 
 start () {
-  Thread.sleep(Long.MAX_VALUE);
+ 
+  startNameNode();
+  startDataNode();
+  startSecondaryNode();
+  
+}
+
+startDataNode(){
+   cmd = "sudo service hadoop-hdfs-datanode start") 
+  ant.exec();
+}
+
+startNameNode(){
+  cmd = "sudo service hadoop-hdfs-namenode start (${ip}:50070)") 
+  ant.exec(cmd)  
+}
+
+startSecondaryNode(){
+  cmd = "sudo service hadoop-hdfs-secondarynamenode start") 
+  ant.exec(cmd)  
 }
 
 }
