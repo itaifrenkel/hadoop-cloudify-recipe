@@ -1,4 +1,5 @@
 import java.util.concurrent.TimeUnit;
+import static Hadoop.*
 
 service {
 	name "hadoop"
