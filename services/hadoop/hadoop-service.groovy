@@ -10,27 +10,19 @@ service {
 	numInstances 1
 	minAllowedInstances 1
 	maxAllowedInstances 2
-	def hadoopx = null;
-	def hadoop = {
-		println "in hadoop f"
-		if (hadoopx == null)
-			hadoopx =new Hadoop()
-	
-		return hadoopx
-		
-	}
+
 	
 	compute {
 		template "SMALL_LINUX"
 	}
 
 	lifecycle {
-		install { hadoop().install() }
+		install { Hadoop.install() }
 		start { println "befor start f"
-			hadoop().startNameNode() }
+			Hadoop.startNameNode() }
 			startDetection {
     	//	ServiceUtils.isPortsOccupied(hadoop.nameServicePort, "127.0.0.1") &&
-    		hadoop().isNameNodeRuning()
+    		Hadoop.isNameNodeRuning()
 	}
 	}
 	
