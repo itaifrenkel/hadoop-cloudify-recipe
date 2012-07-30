@@ -16,8 +16,9 @@ service {
 		start {
 			namenode.start("${ipAddress}:${nameNodeInfoPort}")
 			datanode.start("${ipAddress}:${dataNodeInfoPort}")
-			//tail log
-			return "tail -F /var/log/hadoop-hdfs/${namenode.name}-ip-*.log".execute() 
+
+			//dummy process
+			return "sh -c :".execute() 
 		}
 		
 		preStop {
