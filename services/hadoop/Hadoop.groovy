@@ -4,12 +4,13 @@ import org.cloudifysource.dsl.context.ServiceContext;
 
 class Hadoop {
 
-String workingDir
-ConfigObject config
-ServiceContext context
-AntBuilder ant
+def  workingDir
+def  config
+def  context
+def ant
 
 Hadoop() {
+   println "Abefore ant"
   ant = new AntBuilder()
   println "Aftyer Ant"
   context = ServiceContextFactory.getServiceContext()
