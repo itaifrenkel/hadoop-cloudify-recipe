@@ -19,7 +19,7 @@ service {
 	lifecycle {
 		install { Hadoop.install() }
 		start { println "befor start f"
-			def context = ServiceContextFactory.getServiceContext()
+			//def context = ServiceContextFactory.getServiceContext()
 			Hadoop.init(context)
 			Hadoop.startNameNode() }
 		startDetection {
