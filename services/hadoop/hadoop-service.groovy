@@ -14,8 +14,8 @@ service {
 		}
 		
 		start {
-			namenode.start "${ipAddress}:${nameNodeServicePort}"
-			datanode.start
+			namenode.start("${ipAddress}:${nameNodeServicePort}")
+			datanode.start()
 			//dummy process
 			return "sh -c :".execute() 
 		}
