@@ -26,7 +26,11 @@ service {
 		}	
 		
 		startDetection {
-    		namenode.isStarted() && datanode.isStarted()
+    		namenode.isStarted() && 
+			ServiceUtils.isPortsOccupied(nameNodeServicePort, "127.0.0.1")
+			
+			datanode.isStarted() &&
+			ServiceUtils.isPortsOccupied(dataNodeServicePort, "127.0.0.1")
 		}
 		
         locator {     
@@ -49,6 +53,11 @@ service {
 			return JmxMonitors.getJmxMetrics("127.0.0.1",nameNodeJmxPort,nameNodeJmxBeans)
         }
 	}
+	
+	network {
+        port = nameNodeServicePort
+        protocolDescription ="Hadoop IPC ClientProtocol"
+    }
 	
 	userInterface {
 
