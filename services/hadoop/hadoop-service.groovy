@@ -11,6 +11,7 @@ service {
 	maxAllowedInstances 2
 	def hadoopx = null;
 	def hadoop = {
+		println "in hadoop f"
 		if (hadoopx == null)
 			hadoopx =new Hadoop()
 	
@@ -24,7 +25,8 @@ service {
 
 	lifecycle {
 		install { hadoop().install() }
-		start { hadoop().startNameNode() }
+		start { println "befor start f"
+			hadoop().startNameNode() }
 			startDetection {
     	//	ServiceUtils.isPortsOccupied(hadoop.nameServicePort, "127.0.0.1") &&
     		hadoop().isNameNodeRuning()
