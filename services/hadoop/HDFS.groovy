@@ -13,7 +13,7 @@ class HDFS {
         return ret;
   }
 
-  static def hdfsCmdThrowOnExitCode(args)  {
+  static def hdfsClient(args)  {
     def ret = hdfsCmd(args)
       if (ret.exitcode != 0) {
            throw new Exception("command \"hdfs ${args}\" exit code ${ret.exitcode} stdout: ${ret.stdout} stderr: ${ret.stderr}")
