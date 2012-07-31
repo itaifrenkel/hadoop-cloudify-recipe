@@ -60,7 +60,8 @@ service {
 customCommands ([	
     // A command with two parameters (firstName and lastName)
     "MYCMD" : {firstName, lastName ->        
-        System.out.println("User :"+firstName+ " " +lastName + " text is "+firstName)
+        def cmd =  " dfs -ls /"
+        namenode.serviceCmd(cmd).exitcode == 0;
         return true
     }
 ])	
