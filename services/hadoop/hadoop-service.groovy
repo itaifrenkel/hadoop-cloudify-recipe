@@ -6,6 +6,7 @@ service {
 	def ipAddress = ServiceUtils.getPrimaryInetAddress();
 	def namenode = new LinuxService("hadoop-hdfs-namenode")
 	def datanode = new LinuxService("hadoop-hdfs-datanode")
+	def hdfs = new HDFS()
 	
 	lifecycle {
 		
@@ -57,25 +58,23 @@ service {
 			return JmxMonitors.getJmxMetrics("127.0.0.1",nameNodeJmxPort,nameNodeJmxBeans)
         }
 	}
-	
-	
 
 customCommands ([	
     "LS" : {folderName ->        
         def cmd1 =  "dfs -ls " + folderName
-        def out1 = namenode.hdfsCmdThrowOnExitCode(cmd1).stdout 
+        def out1 = hdfs.hdfsCmdThrowOnExitCode(cmd1).stdout 
         println(out1)
         return "\n" +out1
     },
     "PUT" :  {srcFolderName, dstFolderName->        
         def cmd2 =  "dfs -put " + srcFolderName + " " + dstFolderName
-        def out2 = namenode.hdfsCmdThrowOnExitCode(cmd2).stdout
+        def out2 = hdfs.hdfsCmdThrowOnExitCode(cmd2).stdout
          println(out2)
         return "\n"+ out2
     },
     "CAT" :  {fileName->        
         def cmd3 =  "dfs -cat " + fileName
-        def out3 = namenode.hdfsCmdThrowOnExitCode(cmd3).stdout
+        def out3 = hdfs.hdfsCmdThrowOnExitCode(cmd3).stdout
          println(out3)
         return "\n"+ out3
     },
