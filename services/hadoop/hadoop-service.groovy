@@ -55,6 +55,24 @@ service {
         }
 	}
 	
+	customCommands ([
+		"put" : {url,dest -> 
+			
+			def ant = new AntBuilder()
+			ant.sequntial {
+				get(src:"${url}", dest:"${context.serviceDirectory}/tmp", skipexisting:false, failonerror:true)
+				exec(
+					resultproperty:"exitcode",
+					executable: "hdfs dfs put ") {
+							arg("-put ${context.serviceDirectory}/tmp ${dst}")
+					 }
+			}
+			
+			def ret = ant.project.properties
+			return (ret.exitcode as int)
+		}
+	])
+
 	userInterface {
 
 		metricGroups = ([
