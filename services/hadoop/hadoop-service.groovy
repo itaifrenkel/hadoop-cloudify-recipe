@@ -59,20 +59,20 @@ service {
 
 customCommands ([	
     "LS" : {folderName ->        
-        def cmd1 =  "hdfs dfs -ls " + folderName
-        def out1 = namenode.serviceCmdThrowOnExitCode(cmd1).stdout
+        def cmd1 =  "dfs -ls " + folderName
+        def out1 = namenode.hdfsCmdThrowOnExitCode(cmd1).stdout
         println(out1)
         return true
     },
     "PUT" :  {srcFolderName, dstFolderName->        
-        def cmd2 =  "hdfs dfs -put " + srcFolderName + " " + dstFolderName
-        def out2 = namenode.serviceCmdThrowOnExitCode(cmd2).stdout
+        def cmd2 =  "dfs -put " + srcFolderName + " " + dstFolderName
+        def out2 = namenode.hdfsCmdThrowOnExitCode(cmd2).stdout
         println(out2)
         return true
     },
     "CAT" :  {fileName->        
-        def cmd3 =  "hdfs dfs -cat " + fileName
-        def out3 = namenode.serviceCmdThrowOnExitCode(cmd3).stdout
+        def cmd3 =  "dfs -cat " + fileName
+        def out3 = namenode.hdfsCmdThrowOnExitCode(cmd3).stdout
         println(out3)
         return true
     },
