@@ -43,7 +43,7 @@ class JmxMonitors {
 		return 0;
 	}
 	
-		/* Returns a map of metrics values */ 
+	/* Returns a map of metrics values */ 
 	def static getJmxMetrics(host,jmxPort,metricNamesToMBeansNames) {
 		def server = connectRMI(host, jmxPort)
 		
