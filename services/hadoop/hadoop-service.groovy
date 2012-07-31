@@ -49,6 +49,9 @@ service {
 				"Number of ops for publishing stats": ["Hadoop:name=MetricsSystem,service=NameNode,sub=Stats", "PublishNumOps"],
 				"Average time for publishing stats": ["Hadoop:name=MetricsSystem,service=NameNode,sub=Stats", "PublishAvgTime"],
 				"Dropped updates by all sinks": ["Hadoop:name=MetricsSystem,service=NameNode,sub=Stats", "DroppedPubAll"],
+
+				"Total Files": ["Hadoop:name=FSNamesystem,service=NameNode", "FilesTotal"],
+				"Total Blocks": ["Hadoop:name=FSNamesystem,service=NameNode", "BlocksTotal"],
 			]
 			
 			return JmxMonitors.getJmxMetrics("127.0.0.1",nameNodeJmxPort,nameNodeJmxBeans)
@@ -121,40 +124,19 @@ customCommands ([
 					"Dropped updates by all sinks",
 				])
 			} ,
+			metricGroup {
+
+				name "HadoopFSNameSystem"
+
+				metrics([
+					"Total Files",
+					"Total Blocks",
+				])
+			} ,
 		]
 		)
 
 		widgetGroups = ([
-			widgetGroup {
-				name "Number of active metrics sources"
-				widgets ([
-					balanceGauge{metric = "Number of active metrics sources"},
-					barLineChart{
-						metric "Number of active metrics sources"
-						axisYUnit Unit.REGULAR
-					}
-				])
-			},
-			widgetGroup {
-				name "Number of active metrics sinks"
-				widgets([
-					balanceGauge{metric = "Number of active metrics sinks"},
-					barLineChart {
-						metric "Number of active metrics sinks"
-						axisYUnit Unit.REGULAR
-					}
-				])
-			},
-			widgetGroup {
-				name "Number of ops for snapshot stats"
-				widgets ([
-					balanceGauge{metric = "Number of ops for snapshot stats"},
-					barLineChart{
-						metric "Number of ops for snapshot stats"
-						axisYUnit Unit.REGULAR
-					}
-				])
-			},
 			widgetGroup {
 
 				name "Average time for snapshot stats"
@@ -162,17 +144,6 @@ customCommands ([
 					balanceGauge{metric = "Average time for snapshot stats"},
 					barLineChart {
 						metric "Average time for snapshot stats"
-						axisYUnit Unit.REGULAR
-					}
-				])
-			} ,
-			widgetGroup {
-
-				name "Number of ops for publishing stats"
-				widgets([
-					balanceGauge{metric = "Number of ops for publishing stats"},
-					barLineChart {
-						metric "Number of ops for publishing stats"
 						axisYUnit Unit.REGULAR
 					}
 				])
@@ -195,6 +166,28 @@ customCommands ([
 					balanceGauge{metric = "Dropped updates by all sinks"},
 					barLineChart {
 						metric "Dropped updates by all sinks"
+						axisYUnit Unit.REGULAR
+					}
+				])
+			} ,
+			widgetGroup {
+
+				name "Total Files"
+				widgets([
+					balanceGauge{metric = "Total Files"},
+					barLineChart {
+						metric "Total Files"
+						axisYUnit Unit.REGULAR
+					}
+				])
+			} ,
+			widgetGroup {
+
+				name "Total Blocks"
+				widgets([
+					balanceGauge{metric = "Total Blocks"},
+					barLineChart {
+						metric "Total Blocks"
 						axisYUnit Unit.REGULAR
 					}
 				])
