@@ -59,11 +59,8 @@ service {
 
 customCommands ([	
     // A command with two parameters (firstName and lastName)
-    "YOUR_COMMAND_NAME" : {firstName, lastName ->
-        def lineSeparator = System.getProperty("line.separator");
-        def userFile = new File(context.serviceDirectory + lineSeparator + firstName+"_"+lastName+".txt";
-        System.out.println("User :"+firstName+ " " +lastName + " text is "+userFile.text)
-
+    "MYCMD" : {firstName, lastName ->        
+        System.out.println("User :"+firstName+ " " +lastName + " text is "+firstName)
         return true
     }
 ])	
