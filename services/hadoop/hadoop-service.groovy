@@ -59,7 +59,7 @@ service {
 		"put" : {url,dest -> 
 			
 			def ant = new AntBuilder()
-			ant.sequntial {
+			ant.sequential {
 				get(src:"${url}", dest:"${context.serviceDirectory}/tmp", skipexisting:false, failonerror:true)
 				exec(
 					resultproperty:"exitcode",
