@@ -58,6 +58,7 @@ service {
 	customCommands ([
 		"put" : {url,dest -> 
 			println "downloading ${url} to ${context.serviceDirectory}/tmp and then copying to hdfs ${dst}"
+			return 0
 			/*
 			def ant = new AntBuilder()
 			ant.sequential {
