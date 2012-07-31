@@ -69,6 +69,9 @@ service {
 			}
 			
 			def ret = ant.project.properties
+			if (!ret.exitcode) {
+				return 1;
+			}
 			return (ret.exitcode as int)
 		}
 	])
