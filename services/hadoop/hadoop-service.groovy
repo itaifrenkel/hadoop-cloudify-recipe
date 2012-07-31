@@ -55,9 +55,24 @@ service {
         }
 	}
 	
-	customCommands ([
+	
+
+customCommands ([	
+    // A command with two parameters (firstName and lastName)
+    "YOUR_COMMAND_NAME" : {firstName, lastName ->
+        def lineSeparator = System.getProperty("line.separator");
+        def userFile = new File(context.serviceDirectory + lineSeparator + firstName+"_"+lastName+".txt";
+        System.out.println("User :"+firstName+ " " +lastName + " text is "+userFile.text)
+
+        return true
+    }
+])	
+
+
+	
+	/*customCommands ([
 		"put" : {url,dest -> 
-			return ("downloading ${url} to ${context.serviceDirectory}/tmp and then copying to hdfs ${dst}")
+			return ("downloading ${url} to ${context.serviceDirectory}/tmp and then copying to hdfs ${dst}")*/
 
 			/*
 			def ant = new AntBuilder()
@@ -76,8 +91,8 @@ service {
 			}
 			return (ret.exitcode as int)
 			*/
-		}
-	])
+//		}
+//	])
 
 	userInterface {
 
