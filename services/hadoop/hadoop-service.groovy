@@ -1,4 +1,4 @@
-static import HDFS.hdfsClient
+import static HDFS.hdfsClient
 
 service {
 	name "hadoop"
