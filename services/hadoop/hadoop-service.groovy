@@ -1,3 +1,5 @@
+static import HDFS.hdfsCmdThrowOnExitCode as hdfsClient
+
 service {
 	name "hadoop"
 	icon "hadoop.jpg"
@@ -6,7 +8,6 @@ service {
 	def ipAddress = ServiceUtils.getPrimaryInetAddress();
 	def namenode = new LinuxService("hadoop-hdfs-namenode")
 	def datanode = new LinuxService("hadoop-hdfs-datanode")
-	def hdfs = new HDFS()
 	
 	lifecycle {
 		
@@ -62,19 +63,19 @@ service {
 customCommands ([	
     "LS" : {folderName ->        
         def cmd1 =  "dfs -ls " + folderName
-        def out1 = hdfs.hdfsCmdThrowOnExitCode(cmd1).stdout 
+        def out1 = hdfsClient(cmd1).stdout 
         println(out1)
         return "\n" +out1
     },
     "PUT" :  {srcFolderName, dstFolderName->        
         def cmd2 =  "dfs -put " + srcFolderName + " " + dstFolderName
-        def out2 = hdfs.hdfsCmdThrowOnExitCode(cmd2).stdout
+        def out2 = hdfsClient(cmd2).stdout
          println(out2)
         return "\n"+ out2
     },
     "CAT" :  {fileName->        
         def cmd3 =  "dfs -cat " + fileName
-        def out3 = hdfs.hdfsCmdThrowOnExitCode(cmd3).stdout
+        def out3 = hdfsClient(cmd3).stdout
          println(out3)
         return "\n"+ out3
     },
