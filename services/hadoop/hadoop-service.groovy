@@ -79,33 +79,23 @@ customCommands ([
          println(out3)
         return "\n"+ out3
     },
+     "COPY" :  {srcFolderName, dstFolderName->        
+        def cmd4 =  "dfs -cp " + srcFolderName + " " + dstFolderName
+        def out4 = hdfsClient(cmd4).stdout
+         println(out4)
+        return "\n"+ out4
+    },
+     "RM" :  {fileName->        
+        def cmd5 =  "dfs -rmr " + fileName
+        def out5 = hdfsClient(cmd3).stdout
+         println(out5)
+        return "\n"+ out5
+    },
 ])	
 
 
 	
-	/*customCommands ([
-		"put" : {url,dest -> 
-			return ("downloading ${url} to ${context.serviceDirectory}/tmp and then copying to hdfs ${dst}")*/
-
-			/*
-			def ant = new AntBuilder()
-			ant.sequential {
-				get(src:"${url}", dest:"${context.serviceDirectory}/tmp", skipexisting:false, failonerror:true)
-				exec(
-					resultproperty:"exitcode",
-					executable: "hdfs dfs put ") {
-							arg("-put ${context.serviceDirectory}/tmp ${dst}")
-					 }
-			}
-			
-			def ret = ant.project.properties
-			if (!ret.exitcode) {
-				return 1;
-			}
-			return (ret.exitcode as int)
-			*/
-//		}
-//	])
+	
 
 	userInterface {
 
