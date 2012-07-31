@@ -1,4 +1,4 @@
-static import HDFS.hdfsCmdThrowOnExitCode as hdfsClient
+static import HDFS.hdfsClient
 
 service {
 	name "hadoop"
