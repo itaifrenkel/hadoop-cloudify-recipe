@@ -87,7 +87,7 @@ customCommands ([
     },
      "RM" :  {fileName->        
         def cmd5 =  "dfs -rmr " + fileName
-        def out5 = hdfsClient(cmd3).stdout
+        def out5 = hdfsClient(cmd5).stdout
          println(out5)
         return "\n"+ out5
     },
