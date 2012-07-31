@@ -13,6 +13,7 @@ service {
 		
 		install 
 		{}
+		//install.sh not checked yet
 		//"install.sh"
 		
 		start {
