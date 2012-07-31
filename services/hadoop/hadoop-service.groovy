@@ -11,9 +11,7 @@ service {
 	
 	lifecycle {
 		
-		install { 
-			
-		}
+		install "install.sh"
 		
 		start {
 			namenode.start("${ipAddress}:${nameNodeInfoPort}")
