@@ -44,6 +44,11 @@ service {
 		monitors {
 		
 			def nameNodeJmxBeans = [
+				"Total Files": ["Hadoop:name=FSNamesystem,service=NameNode", "FilesTotal"],
+				"Total Blocks": ["Hadoop:name=FSNamesystem,service=NameNode", "BlocksTotal"],
+				"Capacity Used (GB)": ["Hadoop:name=FSNamesystem,service=NameNode", "CapacityUsedGB"],
+				"Blocks with corrupt replicas": ["Hadoop:name=FSNamesystem,service=NameNode", "CorruptBlocks"],
+
 				"Number of active metrics sources": ["Hadoop:name=MetricsSystem,service=NameNode,sub=Stats", "NumActiveSources"],
 				"Number of active metrics sinks": ["Hadoop:name=MetricsSystem,service=NameNode,sub=Stats", "NumActiveSinks"],
 				"Number of ops for snapshot stats": ["Hadoop:name=MetricsSystem,service=NameNode,sub=Stats", "SnapshotNumOps"],
@@ -52,8 +57,6 @@ service {
 				"Average time for publishing stats": ["Hadoop:name=MetricsSystem,service=NameNode,sub=Stats", "PublishAvgTime"],
 				"Dropped updates by all sinks": ["Hadoop:name=MetricsSystem,service=NameNode,sub=Stats", "DroppedPubAll"],
 
-				"Total Files": ["Hadoop:name=FSNamesystem,service=NameNode", "FilesTotal"],
-				"Total Blocks": ["Hadoop:name=FSNamesystem,service=NameNode", "BlocksTotal"],
 			]
 			
 			return JmxMonitors.getJmxMetrics("127.0.0.1",nameNodeJmxPort,nameNodeJmxBeans)
@@ -102,7 +105,18 @@ customCommands ([
 		metricGroups = ([
 			metricGroup {
 
-				name "HadoopNameNodeStats"
+				name "FSNameSystem"
+
+				metrics([
+					"Total Files",
+					"Total Blocks",
+					"Capacity Used (GB)",
+					"Blocks with corrupt replicas",
+				])
+			} ,
+			metricGroup {
+
+				name "NameNode Stats"
 
 				metrics([
 					"Number of active metrics sources",
@@ -114,52 +128,10 @@ customCommands ([
 					"Dropped updates by all sinks",
 				])
 			} ,
-			metricGroup {
-
-				name "HadoopFSNameSystem"
-
-				metrics([
-					"Total Files",
-					"Total Blocks",
-				])
-			} ,
 		]
 		)
 
 		widgetGroups = ([
-			widgetGroup {
-
-				name "Average time for snapshot stats"
-				widgets([
-					balanceGauge{metric = "Average time for snapshot stats"},
-					barLineChart {
-						metric "Average time for snapshot stats"
-						axisYUnit Unit.REGULAR
-					}
-				])
-			} ,
-			widgetGroup {
-
-				name "Average time for publishing stats"
-				widgets([
-					balanceGauge{metric = "Average time for publishing stats"},
-					barLineChart {
-						metric "Average time for publishing stats"
-						axisYUnit Unit.REGULAR
-					}
-				])
-			} ,
-			widgetGroup {
-
-				name "Dropped updates by all sinks"
-				widgets([
-					balanceGauge{metric = "Dropped updates by all sinks"},
-					barLineChart {
-						metric "Dropped updates by all sinks"
-						axisYUnit Unit.REGULAR
-					}
-				])
-			} ,
 			widgetGroup {
 
 				name "Total Files"
@@ -178,6 +150,39 @@ customCommands ([
 					balanceGauge{metric = "Total Blocks"},
 					barLineChart {
 						metric "Total Blocks"
+						axisYUnit Unit.REGULAR
+					}
+				])
+			} ,
+			widgetGroup {
+
+				name "Capacity Used (GB)"
+				widgets([
+					balanceGauge{metric = "Capacity Used (GB)"},
+					barLineChart {
+						metric "Capacity Used (GB)"
+						axisYUnit Unit.REGULAR
+					}
+				])
+			} ,
+			widgetGroup {
+
+				name "Blocks with corrupt replicas"
+				widgets([
+					balanceGauge{metric = "Blocks with corrupt replicas"},
+					barLineChart {
+						metric "Blocks with corrupt replicas"
+						axisYUnit Unit.REGULAR
+					}
+				])
+			} ,
+			widgetGroup {
+
+				name "Dropped updates by all sinks"
+				widgets([
+					balanceGauge{metric = "Dropped updates by all sinks"},
+					barLineChart {
+						metric "Dropped updates by all sinks"
 						axisYUnit Unit.REGULAR
 					}
 				])
